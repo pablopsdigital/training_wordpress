@@ -15,11 +15,26 @@
     <header>
 
         <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/brand.png" alt="brand pablopsdigital.com">
+            <div class="row align-items-center">
+                <div class="col-4 pt-2 pb-2">
+                    <img src="<?php echo get_template_directory_uri() ?>/assets/img/brand_white.png" alt="brand pablopsdigital.com">
                 </div>
+                <div class="col-8">
+                    <nav>
+                        <?php wp_nav_menu(
+                            array(
 
+                                //Posición del menu en el administrador
+                                'theme_location' => 'top_menu',
+                                //agregar clase estilos menu
+                                'menu_class' => 'menu-principal',
+                                //agregar clase estilos contenedor
+                                'container_class' => 'container-menu'
+                            )
+                        );
+                        ?>
+                    </nav>
+                </div>
             </div>
 
         </div>

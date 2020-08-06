@@ -10,6 +10,11 @@ function init_template()
 
     //Support titulo de página
     add_theme_support('title-tag');
+
+    //Registrar una localización para un menu
+    register_nav_menus(
+        array('top_menu' => 'Menú Principal')
+    );
 }
 
 //Llamada al hook after_setup_theme para insertar la fucnión
