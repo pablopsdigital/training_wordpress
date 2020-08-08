@@ -1,6 +1,6 @@
 <?php
 
-
+//========================================================================================
 //Función para ejecutar al inicializar el theme
 //=======================================================================================
 function init_template()
@@ -20,8 +20,9 @@ function init_template()
 //Llamada al hook after_setup_theme para insertar la fucnión
 add_action('after_setup_theme', 'init_template');
 
-
-//Función para cargar liberías//========================================================================================
+//========================================================================================
+//Función para cargar liberías
+//========================================================================================
 function load_assets()
 {
 
@@ -51,3 +52,66 @@ function load_assets()
 
 //El hook wp_enqueue_scripts se ejecuta al renderizar inicialmente la página
 add_action('wp_enqueue_scripts', 'load_assets');
+
+//========================================================================================
+//Crear un Sidebar
+//========================================================================================
+function sidebar()
+{
+    register_sidebar(
+        array(
+
+            //Datos de configuración widget
+            'name' => 'Pie de página',
+            'id' => 'footer',
+            'description' => 'Zona de widget para el pie de página',
+            //Carga antes del titulo
+            'before_title' => '<p>',
+            'after_title' => '</p>',
+
+            //Cargar el contenido del widget
+            //con %1$s toma el valor id del widget o las clases css con %2$s
+            'before_widget' => '<div id="%1$s" class="%2$s">',
+            'after_widget' => '</div>',
+        )
+    );
+}
+
+//Hook para cargar el sidebar
+add_action('widgets_init', 'sidebar');
+
+//========================================================================================
+//Custom post type productos
+//========================================================================================
+function productos_type()
+{
+
+    $labels = array(
+        'name' => 'Productos',
+        'sincular_name' => 'Producto',
+        'menu_name' => 'Productos',
+    );
+
+    //Definición de argumentos
+    $args = array(
+        'label' => 'Productos',
+        'descripction' => 'Productos de prueba',
+        'labels' => $labels,
+        'supports' => array('title', 'editor', 'thumbnail', 'custom-fields', 'page-attributes'),
+        'public' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'menu_icon' => 'dashicons-cart',
+        'can_export' => true,
+        'publicly_queryable' => true,
+        'rewrite' => true,
+        'show_in_rest' => true,
+
+    );
+
+    //Registramos nombre post type y argumentos de configuración
+    register_post_type('producto', $args);
+}
+
+// Hook init se ejecuta despues de worpdress setee el theme que usuamos
+add_action('init', 'productos_type', 0);

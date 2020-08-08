@@ -16,7 +16,7 @@
 
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-4 pt-2 pb-2">
+                <div class="col-4 py-2">
                     <img src="<?php echo get_template_directory_uri() ?>/assets/img/brand_white.png" alt="brand pablopsdigital.com">
                 </div>
                 <div class="col-8">
