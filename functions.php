@@ -115,3 +115,32 @@ function productos_type()
 
 // Hook init se ejecuta despues de worpdress setee el theme que usuamos
 add_action('init', 'productos_type', 0);
+
+
+//========================================================================================
+//Registrar una nueva taxonomia para ordenar productos
+//========================================================================================
+function registrar_taxonomia()
+{
+
+    //Configuración del listado de argumentos de configuración de la taxonomía
+    $args = array(
+        'hierarchical' => true,
+        'labels' => array(
+            'name' => 'Categorías de productos',
+            'singular_name' => 'Categoría de productos',
+        ),
+        'show_in_nav_menu' => true,
+        'show_admin_column' => true,
+        'rewrite' => array(
+            'slug' => 'categoria-productos',
+        )
+    );
+
+    //Función para registrar la taxonomica
+    //Recibe el slug, un array con los custom types a incluir, argumentos configuración
+    register_taxonomy('categoria-productos', array('producto'), $args);
+}
+
+//Hook init al construir la plantilla para cargar la taxonomia
+add_action('init', 'registrar_taxonomia');
